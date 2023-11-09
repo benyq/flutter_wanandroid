@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_wanandroid/ui/category/category_page.dart';
 import 'package:flutter_wanandroid/ui/home/home_page.dart';
 import 'package:flutter_wanandroid/ui/me/me_page.dart';
 import 'package:flutter_wanandroid/ui/project/project_page.dart';
 import 'package:flutter_wanandroid/ui/themes_provider.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class MainPage extends ConsumerStatefulWidget {
   const MainPage({super.key});
@@ -38,21 +38,37 @@ class _MainPageState extends ConsumerState<MainPage> {
         title: Text(_bottomItemData[_currentIndex].label),
         automaticallyImplyLeading: false,
         actions: [
-          InkWell(
-              onTap: () {},
-              child: const SizedBox.square(
-                dimension: 50,
-                child: Icon(
-                  Icons.search_rounded,
-                  size: 30,
-                ),
-              ))
+          Offstage(
+            offstage: _currentIndex != 0,
+            child: InkWell(
+                onTap: () {
+                  Fluttertoast.showToast(
+                      msg: "This is Center Short Toast",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                  );
+                },
+                child: const SizedBox.square(
+                  dimension: 50,
+                  child: Icon(
+                    Icons.search_rounded,
+                    size: 30,
+                  ),
+                )),
+          )
         ],
         toolbarHeight: 50,
       ),
       body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-          items: [..._bottomItemData.map((e) => _bottomItem(e, Theme.of(context).bottomNavigationBarTheme.backgroundColor))],
+          items: [
+            ..._bottomItemData.map((e) => _bottomItem(
+                e, Theme.of(context).bottomNavigationBarTheme.backgroundColor))
+          ],
           onTap: (index) {
             setState(() {
               _currentIndex = index;
@@ -64,7 +80,9 @@ class _MainPageState extends ConsumerState<MainPage> {
 
   BottomNavigationBarItem _bottomItem(_BottomData data, Color? background) {
     return BottomNavigationBarItem(
-        icon: Icon(data.iconData), label: data.label, backgroundColor: background);
+        icon: Icon(data.iconData),
+        label: data.label,
+        backgroundColor: background);
   }
 }
 

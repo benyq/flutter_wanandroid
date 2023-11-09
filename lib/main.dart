@@ -4,8 +4,11 @@ import 'package:flutter_wanandroid/ui/splash_page.dart';
 import 'package:flutter_wanandroid/ui/themes.dart';
 import 'package:flutter_wanandroid/ui/themes_provider.dart';
 
+import 'net/dio_manager.dart';
+
 
 void main() {
+  DioManager.getInstance().init();
   runApp(const ProviderScope(child: MyApp()));
 }
 
