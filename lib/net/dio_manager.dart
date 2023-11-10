@@ -24,5 +24,6 @@ class DioManager {
     _androidService = WanAndroidService(_dio);
   }
 
-
 }
+
+WanAndroidService get androidService => DioManager._instance!.androidService;

@@ -21,9 +21,11 @@ class _WanAndroidService implements WanAndroidService {
   String? baseUrl;
 
   @override
-  Future<ApiResponse<List<BannerModel>>> banner() async {
+  Future<ApiResponse<List<BannerModel>>> banner(
+      [CancelToken? cancelToken]) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -37,6 +39,7 @@ class _WanAndroidService implements WanAndroidService {
               'banner/json',
               queryParameters: queryParameters,
               data: _data,
+              cancelToken: cancelToken,
             )
             .copyWith(
                 baseUrl: _combineBaseUrls(

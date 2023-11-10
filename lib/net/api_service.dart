@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_wanandroid/net/api_response.dart';
+import 'package:retrofit/dio.dart';
 import 'package:retrofit/http.dart';
 import 'model/banner_model.dart';
 
@@ -10,6 +11,6 @@ abstract class WanAndroidService {
   factory WanAndroidService(Dio dio, {String baseUrl}) = _WanAndroidService;
 
   @GET("banner/json")
-  Future<ApiResponse<List<BannerModel>>> banner();
+  Future<ApiResponse<List<BannerModel>>> banner([@CancelRequest() CancelToken? cancelToken]);
 
 }
