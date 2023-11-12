@@ -58,6 +58,39 @@ class _WanAndroidService implements WanAndroidService {
     return value;
   }
 
+  @override
+  Future<ApiResponse<PageModel<ArticleModel>>> getArticles(int page) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<PageModel<ArticleModel>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'article/list/${page}/json',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ApiResponse<PageModel<ArticleModel>>.fromJson(
+      _result.data!,
+      (json) => PageModel<ArticleModel>.fromJson(
+        json as Map<String, dynamic>,
+        (json) => ArticleModel.fromJson(json as Map<String, dynamic>),
+      ),
+    );
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

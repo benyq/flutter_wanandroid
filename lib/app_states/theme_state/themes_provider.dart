@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final themesProvider = StateNotifierProvider<ThemesProvider, ThemeMode?>((_) {
+final themesProvider = NotifierProvider<ThemesProvider, ThemeMode?>(() {
   return ThemesProvider();
 });
 
-class ThemesProvider extends StateNotifier<ThemeMode?> {
-  ThemesProvider() : super(ThemeMode.system) {
-    state = ThemeMode.dark;
-  }
+class ThemesProvider extends Notifier<ThemeMode?> {
 
   void changeTheme(bool isDark) {
     state = isDark ? ThemeMode.dark : ThemeMode.light;
+  }
+
+  @override
+  ThemeMode? build() {
+    return ThemeMode.light;
   }
 }

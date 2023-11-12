@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../themes_provider.dart';
+import '../../app_states/theme_state/themes_provider.dart';
 
 class MePage extends ConsumerWidget {
   const MePage({super.key});

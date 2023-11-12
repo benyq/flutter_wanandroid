@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
-import '../ui/main_page.dart';
-
-void test(BuildContext context) {
+void navigateTo(BuildContext context, Widget page) {
   Navigator.of(context).push(
     PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>
-        const MainPage(),
+        pageBuilder: (context, animation, secondaryAnimation) => page,
         transitionsBuilder:
             (context, animation, secondaryAnimation, child) {
           const begin = Offset(1.0, 0.0);
