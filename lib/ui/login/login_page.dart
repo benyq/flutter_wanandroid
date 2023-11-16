@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:flutter_wanandroid/ui/login/auth_provider.dart';
-
-import '../../navigator_util/ss.dart';
-import '../main_page.dart';
+import 'package:flutter_wanandroid/net/api_response.dart';
+import 'package:flutter_wanandroid/net/model/login_model.dart';
+import 'package:flutter_wanandroid/ui/login/provider/login_provider.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
@@ -42,41 +41,119 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       }
     });
     return Scaffold(
-      appBar: AppBar(
-        title: Text("登录"),
-      ),
-      body: Column(
-        children: [
-          TextField(
-            controller: _usernameController,
-            decoration: InputDecoration(
-              labelText: "用户名",
+      body: ConstrainedBox(
+        constraints: const BoxConstraints.expand(),
+        child: Stack(
+          children: [
+            Positioned(
+                child: Container(
+              width: double.infinity,
+              height: 300,
+              alignment: Alignment.center,
+              color: Colors.blue,
+              child: Image.asset(
+                width: 150,
+                "assets/images/ic_logo.png",
+                fit: BoxFit.cover,
+                color: Colors.white,
+              ),
+            )),
+            Positioned(
+              top: 250,
+              left: 20,
+              right: 20,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                          color:
+                              Theme.of(context).primaryColor.withOpacity(0.3),
+                          blurRadius: 10.0)
+                    ]),
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: _usernameController,
+                      decoration: const InputDecoration(
+                        labelText: "用户名",
+                        prefixIcon: Icon(Icons.perm_identity),
+                        prefixIconConstraints:
+                            BoxConstraints(minWidth: 35, maxWidth: 50),
+                      ),
+                      onChanged: _onTextChanged,
+                    ),
+                    TextField(
+                      controller: _pwdController,
+                      decoration: InputDecoration(
+                          labelText: "密码",
+                          prefixIcon: const Icon(Icons.lock_outline, size: 28,),
+                          prefixIconConstraints:
+                              const BoxConstraints(minWidth: 35, maxWidth: 50),
+                          suffixIcon: IconButton(icon: Icon(loginState.obscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility, size: 24,), onPressed: _changeObscureText,),
+                      suffixIconConstraints: const BoxConstraints(minWidth: 30, maxWidth: 30, maxHeight: 30)),
+                      //密码模式
+                      obscureText: loginState.obscureText,
+                      onChanged: _onTextChanged,
+                    ),
+                    const SizedBox(height: 40),
+                    ElevatedButton(
+                      onPressed: loginState.canLogin
+                          ? () {
+                              _login().then((value){
+                                if(value.isSuccess){
+                                  Navigator.of(context).pop();
+                                }else {
+                                  SmartDialog.showToast(value.errorMsg);
+                                }
+                              });
+                            }
+                          : null,
+                      child: const Text("登录"),
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                ),
+              ),
             ),
-          ),
-          TextField(
-            controller: _pwdController,
-            decoration: InputDecoration(
-              labelText: "密码",
-            ),
-          ),
-          ElevatedButton(
-              child: Text("登录"),
-              onPressed: () {
-                _login();
-              }),
-          Text(loginState.username)
-        ],
+            Positioned(
+                top: 60,
+                child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ))),
+          ],
+        ),
       ),
     );
   }
-
 
   void _showLoading() async {
     SmartDialog.showLoading();
   }
 
+  Future<ApiResponse<LoginModel>> _login() {
+    FocusScope.of(context).requestFocus(FocusNode()); // 关闭键盘
+    final username = _usernameController.text;
+    final password = _pwdController.text;
+    return ref.read(authProvider.notifier).login(username, password);
+  }
 
-  _login() async{
-    ref.read(authProvider.notifier).login();
+  void _onTextChanged(v) {
+    final username = _usernameController.text;
+    final password = _pwdController.text;
+    if (username.isNotEmpty && password.isNotEmpty) {
+      ref.read(authProvider.notifier).canLogin();
+    }
+  }
+
+  void _changeObscureText() {
+    ref.read(authProvider.notifier).changeObscureText();
   }
 }

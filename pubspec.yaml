@@ -44,10 +44,15 @@ dependencies:
   retrofit: '>=4.0.0 <5.0.0'
   logger: any  #for logging purpose
   json_annotation: ^4.8.1
-  card_swiper : ^3.0.0
+  carousel_slider: ^4.2.1
   easy_refresh: ^3.3.2+2
   equatable: ^2.0.5
   flutter_smart_dialog: ^4.9.4
+  flutter_screenutil: ^5.9.0
+  cached_network_image: ^3.3.0
+  webview_flutter: ^4.4.2
+  webview_flutter_android: ^3.9.4
+  webview_flutter_wkwebview: ^3.7.4
 
 dev_dependencies:
   flutter_test:

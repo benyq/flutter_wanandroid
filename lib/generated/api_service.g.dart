@@ -59,6 +59,41 @@ class _WanAndroidService implements WanAndroidService {
   }
 
   @override
+  Future<ApiResponse<List<ArticleModel>>> getTopArticles() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<List<ArticleModel>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'article/top/json',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ApiResponse<List<ArticleModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<ArticleModel>(
+                  (i) => ArticleModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
   Future<ApiResponse<PageModel<ArticleModel>>> getArticles(int page) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -87,6 +122,43 @@ class _WanAndroidService implements WanAndroidService {
         json as Map<String, dynamic>,
         (json) => ArticleModel.fromJson(json as Map<String, dynamic>),
       ),
+    );
+    return value;
+  }
+
+  @override
+  Future<ApiResponse<LoginModel>> login(
+    String username,
+    String password,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'username': username,
+      'password': password,
+    };
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<LoginModel>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+      contentType: 'application/x-www-form-urlencoded',
+    )
+            .compose(
+              _dio.options,
+              'user/login',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ApiResponse<LoginModel>.fromJson(
+      _result.data!,
+      (json) => LoginModel.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }

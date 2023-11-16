@@ -10,6 +10,8 @@ class ApiResponse<T> {
 
   ApiResponse({required this.errorMsg, required this.errorCode, this.data});
 
+  bool get isSuccess => errorCode == 0 && data != null;
+
   factory ApiResponse.fromJson(
       Map<String, dynamic> json, T Function(Object? json) fromJsonT) =>
       _$ApiResponseFromJson(json, fromJsonT);

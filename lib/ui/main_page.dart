@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_wanandroid/app_states/nav_states/nav_notifier.dart';
+import 'package:flutter_wanandroid/app_providers/nav_provider/nav_notifier.dart';
 import 'package:flutter_wanandroid/ui/category/category_page.dart';
 import 'package:flutter_wanandroid/ui/home/home_page.dart';
 import 'package:flutter_wanandroid/ui/me/me_page.dart';
@@ -47,7 +47,7 @@ class _MainPageState extends ConsumerState<MainPage> {
   Widget build(BuildContext context) {
     final navState = ref.watch(navStateProvider);
     return Scaffold(
-      appBar: AppBar(
+      appBar: navState.index != 3 ? AppBar(
         title: Text(_bottomItemData[navState.index].label),
         automaticallyImplyLeading: false,
         actions: [
@@ -74,7 +74,7 @@ class _MainPageState extends ConsumerState<MainPage> {
           )
         ],
         toolbarHeight: 50,
-      ),
+      ): null,
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,

@@ -3,12 +3,16 @@ import 'package:flutter/services.dart';
 
 class Themes {
   static Color lightColor = const Color(0xffededed);
-  static Color darkColor = const Color(0x00049fb6);
+  static Color darkColor = Colors.black;
 
   static final lightTheme = ThemeData(
-      brightness: Brightness.light,
+      colorScheme: ColorScheme.light(
+        background: lightColor
+      ),
       // For light theming
       scaffoldBackgroundColor: Colors.grey.shade100,
+      iconTheme: const IconThemeData(color: Colors.black),
+      dividerColor: darkColor,
       appBarTheme: AppBarTheme(
         backgroundColor: lightColor,
         titleTextStyle: const TextStyle(color: Colors.black, fontSize: 18),
@@ -24,12 +28,17 @@ class Themes {
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: lightColor,
           selectedItemColor: Colors.blue,
-          unselectedItemColor: Colors.black));
+          unselectedItemColor: Colors.black),
+      textTheme: Typography.blackCupertino);
 
   static final darkTheme = ThemeData(
-      brightness: Brightness.dark,
+      colorScheme: ColorScheme.light(
+          background: darkColor
+      ),
       // For dark theming
       scaffoldBackgroundColor: Colors.grey.shade900,
+      iconTheme: const IconThemeData(color: Colors.white),
+      dividerColor: lightColor,
       appBarTheme: AppBarTheme(
         backgroundColor: darkColor,
         titleTextStyle: const TextStyle(color: Colors.white, fontSize: 18),
@@ -45,5 +54,14 @@ class Themes {
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: darkColor,
           selectedItemColor: Colors.blue,
-          unselectedItemColor: Colors.white));
+          unselectedItemColor: Colors.white),
+  textTheme: Typography.whiteCupertino);
+
+  static SystemUiOverlayStyle getSystemUIOverlayStyle(bool isDark) {
+    if (isDark) {
+      return darkTheme.appBarTheme.systemOverlayStyle!;
+    } else {
+      return lightTheme.appBarTheme.systemOverlayStyle!;
+    }
+  }
 }
