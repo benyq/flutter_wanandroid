@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_wanandroid/app_providers/third_provider/api_provider.dart';
 import 'package:flutter_wanandroid/app_providers/user_provider/user_provider.dart';
 import 'package:flutter_wanandroid/net/api_response.dart';
 import 'package:flutter_wanandroid/net/model/login_model.dart';
 
-import '../../../app_providers/api_provider/api_provider.dart';
 import 'login_state.dart';
 
 class LoginProvider extends AutoDisposeNotifier<LoginState> {
@@ -12,7 +12,7 @@ class LoginProvider extends AutoDisposeNotifier<LoginState> {
     state = state.copyWith(isLoading: true);
     final response = await ref.read(apiProvider).login(username, password);
     if (response.isSuccess) {
-      ref.read(userProvider.notifier).setUser(response.data!);
+      ref.read(userProvider.notifier).getUserInfo();
     }
     state = state.copyWith(isLoading: false);
     return response;

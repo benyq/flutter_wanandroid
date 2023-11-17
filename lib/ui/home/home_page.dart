@@ -19,11 +19,21 @@ class HomePage extends ConsumerStatefulWidget {
 
 class _HomePageState extends ConsumerState<HomePage>
     with AutomaticKeepAliveClientMixin {
+
+  late EasyRefreshController _controller;
+
   @override
   void initState() {
     super.initState();
+    _controller = EasyRefreshController(controlFinishLoad: true, controlFinishRefresh: true);
     ref.read(homeStateProvider.notifier).getBanner();
     ref.read(homeStateProvider.notifier).refresh();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   @override
@@ -33,6 +43,7 @@ class _HomePageState extends ConsumerState<HomePage>
     return EasyRefresh(
       header: const CupertinoHeader(),
       footer: const CupertinoFooter(),
+      controller: _controller,
       child: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -73,11 +84,13 @@ class _HomePageState extends ConsumerState<HomePage>
           ),
         ],
       ),
-      onRefresh: () {
-        ref.read(homeStateProvider.notifier).refresh();
+      onRefresh: () async{
+        await ref.read(homeStateProvider.notifier).refresh();
+        _controller.finishRefresh();
       },
-      onLoad: () {
-        ref.read(homeStateProvider.notifier).loadMore();
+      onLoad: () async {
+        await ref.read(homeStateProvider.notifier).loadMore();
+        _controller.finishLoad();
       },
     );
   }
@@ -89,13 +102,14 @@ class _HomePageState extends ConsumerState<HomePage>
 
     String authorName(ArticleModel model) {
       if (model.author.isNotEmpty) {
-        return '作者:${model.author}';
+        return '作者 : ${model.author}';
       }else {
-        return '分享者:${model.shareUser}';
+        return '分享者 : ${model.shareUser}';
       }
     }
 
     return GestureDetector(
+        behavior: HitTestBehavior.opaque,
       onTap: () {
         _navigateToArticlePage(model.title, model.link);
       },

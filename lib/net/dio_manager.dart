@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter_wanandroid/net/api_service.dart';
+import 'package:path_provider/path_provider.dart';
 
 class DioManager {
   static DioManager? _instance;
@@ -16,10 +19,15 @@ class DioManager {
   late WanAndroidService _androidService;
   WanAndroidService get androidService => _androidService;
 
-  void init() {
+  void init() async {
     var logger = LogInterceptor(responseBody: true, requestBody: true);
     _dio.interceptors.add(logger);
-    final cookieJar = CookieJar();
+    final Directory appDocDir = await getApplicationDocumentsDirectory();
+    final String appDocPath = appDocDir.path;
+    final cookieJar = PersistCookieJar(
+      ignoreExpires: true,
+      storage: FileStorage("$appDocPath/.cookies/"),
+    );
     _dio.interceptors.add(CookieManager(cookieJar));
     _androidService = WanAndroidService(_dio);
   }

@@ -1,4 +1,4 @@
-package com.example.flutter_wanandroid
+package com.benyq.flutter_wanandroid
 
 import io.flutter.embedding.android.FlutterActivity
 

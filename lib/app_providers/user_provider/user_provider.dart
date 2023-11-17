@@ -1,17 +1,32 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_wanandroid/app_providers/third_provider/api_provider.dart';
 import 'package:flutter_wanandroid/app_providers/user_provider/user_state.dart';
-import 'package:flutter_wanandroid/net/model/login_model.dart';
 
-class UserProvider extends AutoDisposeNotifier<UserState> {
+class UserProvider extends Notifier<UserState> {
   @override
   UserState build() {
     return const UserState();
   }
 
-  void setUser(LoginModel loginModel) {
-    state = UserState(id: loginModel.id, username: loginModel.username, coinCount: loginModel.coinCount, collectIds: loginModel.collectIds);
+  void getUserInfo() {
+    ref.read(apiProvider).getUserInfo().then((response) {
+      if (response.isSuccess) {
+        var data = response.data!;
+        state = state.copyWith(
+            coinCount: data.coinInfo.coinCount,
+            rank: data.coinInfo.rank,
+            id: data.userInfo.id,
+            username: data.userInfo.username,
+            collectIds: data.userInfo.collectIds);
+      }else {
+        debugPrint('getUserInfo error: errorMsg: ${response.errorMsg}, errorCode: ${response.errorCode}');
+      }
+    }).catchError((e) {
+      debugPrint('getUserInfo error: $e');
+    });
   }
 }
 
 final userProvider =
-    NotifierProvider.autoDispose<UserProvider, UserState>(() => UserProvider());
+    NotifierProvider<UserProvider, UserState>(() => UserProvider());

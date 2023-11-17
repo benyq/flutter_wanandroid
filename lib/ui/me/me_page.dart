@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_wanandroid/app_providers/theme_provider/themes.dart';
 import 'package:flutter_wanandroid/app_providers/theme_provider/themes_provider.dart';
 import 'package:flutter_wanandroid/app_providers/user_provider/user_provider.dart';
+import 'package:flutter_wanandroid/ui/login/login_page.dart';
+import 'package:flutter_wanandroid/utils/navigate_util.dart';
 
-import '../../app_providers/theme_provider/themes.dart';
 
 class MePage extends ConsumerWidget {
   const MePage({super.key});
@@ -22,7 +24,11 @@ class MePage extends ConsumerWidget {
       color: themeModeState.isDark ? const Color(0x00049fb6) : const Color(0xffededed),
       child: Column(
         children: [
-          Container(
+          GestureDetector(onTap: (){
+            if (!userState.isLoggedIn) {
+              navigateTo(context, const LoginPage());
+            }
+          }, child: Container(
             margin: EdgeInsets.only(top: 50.h, left: 15.w, right: 15.w),
             padding: EdgeInsets.all(15.w),
             width: double.infinity,
@@ -56,12 +62,12 @@ class MePage extends ConsumerWidget {
                   children: [
                     _userInfoItem("收藏", userState.collects),
                     _userInfoItem("硬币", userState.coin),
-                    _userInfoItem("排名", userState.coin),
+                    _userInfoItem("排名", userState.realRank),
                   ],
                 )
               ],
             ),
-          ),
+          ),),
           Container(
             margin: EdgeInsets.only(top: 15.h, left: 15.w, right: 15.w),
             padding: EdgeInsets.all(15.w),

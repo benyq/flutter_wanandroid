@@ -6,6 +6,7 @@ import 'package:retrofit/http.dart';
 import 'model/article_model.dart';
 import 'model/banner_model.dart';
 import 'model/login_model.dart';
+import 'model/user_model.dart';
 
 part '../generated/api_service.g.dart';
 
@@ -25,4 +26,7 @@ abstract class WanAndroidService {
   @POST("user/login")
   @FormUrlEncoded()
   Future<ApiResponse<LoginModel>> login(@Field("username") String username, @Field("password") String password);
+
+  @GET('user/lg/userinfo/json')
+  Future<ApiResponse<UserModel>> getUserInfo();
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_wanandroid/app_providers/nav_provider/nav_notifier.dart';
+import 'package:flutter_wanandroid/app_providers/user_provider/user_provider.dart';
 import 'package:flutter_wanandroid/ui/category/category_page.dart';
 import 'package:flutter_wanandroid/ui/home/home_page.dart';
 import 'package:flutter_wanandroid/ui/me/me_page.dart';
@@ -35,6 +36,7 @@ class _MainPageState extends ConsumerState<MainPage> {
     super.initState();
     final navState = ref.read(navStateProvider);
     _pageController = PageController(initialPage: navState.index);
+    ref.read(userProvider.notifier).getUserInfo();
   }
 
   @override

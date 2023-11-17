@@ -3,13 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:flutter_wanandroid/app_providers/theme_provider/themes_provider.dart';
+import 'package:flutter_wanandroid/net/dio_manager.dart';
 import 'package:flutter_wanandroid/ui/splash_page.dart';
 import 'package:flutter_wanandroid/app_providers/theme_provider/themes.dart';
+import 'package:mmkv/mmkv.dart';
 
-import 'net/dio_manager.dart';
-
-
-void main() {
+void main() async{
+  final rootDir = await MMKV.initialize();
+  debugPrint("rootDir: $rootDir");
   DioManager.getInstance().init();
   runApp(const ProviderScope(child: MyApp()));
 }

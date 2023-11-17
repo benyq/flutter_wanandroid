@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_wanandroid/app_providers/api_provider/api_provider.dart';
+import 'package:flutter_wanandroid/app_providers/third_provider/api_provider.dart';
 
 import 'home_state.dart';
 
@@ -16,11 +16,11 @@ class HomeStateNotifier extends Notifier<HomeState> {
     return const HomeState([], []);
   }
 
-  void loadMore() {
+  Future<void> loadMore() async{
     getArticles();
   }
 
-  void refresh() async {
+  Future<void> refresh() async {
     pageIndex = 0;
     final topArticles = await ref.read(apiProvider).getTopArticles();
     if (topArticles.isSuccess) {
@@ -54,16 +54,17 @@ class HomeStateNotifier extends Notifier<HomeState> {
     });
   }
 
-  void getArticles() {
-    ref.read(apiProvider).getArticles(pageIndex).then((value) {
-      if (value.isSuccess) {
-        final data = value.data!.datas ?? [];
+  void getArticles() async{
+    try{
+      final response = await ref.read(apiProvider).getArticles(pageIndex);
+      if (response.isSuccess) {
+        final data = response.data!.datas ?? [];
         state = state.copyWith(articles: state.articles + data);
         pageIndex += 1;
       }
-    }, onError: (e) {
+    }catch(e) {
       debugPrint("home getArticles error: $e");
-    });
+    }
   }
 
 }
