@@ -12,6 +12,7 @@ class Themes {
       // For light theming
       scaffoldBackgroundColor: Colors.grey.shade100,
       iconTheme: const IconThemeData(color: Colors.black),
+      listTileTheme: const ListTileThemeData(iconColor: Colors.black),
       dividerColor: darkColor,
       appBarTheme: AppBarTheme(
         backgroundColor: lightColor,
@@ -38,6 +39,7 @@ class Themes {
       // For dark theming
       scaffoldBackgroundColor: Colors.grey.shade900,
       iconTheme: const IconThemeData(color: Colors.white),
+      listTileTheme: const ListTileThemeData(iconColor: Colors.white),
       dividerColor: lightColor,
       appBarTheme: AppBarTheme(
         backgroundColor: darkColor,

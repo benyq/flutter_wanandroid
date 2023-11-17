@@ -16,8 +16,6 @@ class UserState extends Equatable {
 
   String get collects => collectIds?.length.toString() ?? '-';
 
-  String get user => username.isNotEmpty ? username : '未登录';
-
   String get realRank => rank.isNotEmpty ? rank : '-';
 
   UserState copyWith(

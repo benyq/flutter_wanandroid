@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_wanandroid/app_providers/nav_provider/nav_notifier.dart';
 import 'package:flutter_wanandroid/app_providers/user_provider/user_provider.dart';
+import 'package:flutter_wanandroid/generated/l10n.dart';
 import 'package:flutter_wanandroid/ui/category/category_page.dart';
 import 'package:flutter_wanandroid/ui/home/home_page.dart';
 import 'package:flutter_wanandroid/ui/me/me_page.dart';
@@ -16,12 +17,7 @@ class MainPage extends ConsumerStatefulWidget {
 }
 
 class _MainPageState extends ConsumerState<MainPage> {
-  static final List<_BottomData> _bottomItemData = [
-    _BottomData("首页", Icons.home),
-    _BottomData("项目", Icons.local_fire_department),
-    _BottomData("分类", Icons.category),
-    _BottomData("我的", Icons.person)
-  ];
+
   static const List<Widget> _pages = [
     HomePage(),
     ProjectPage(),
@@ -48,6 +44,12 @@ class _MainPageState extends ConsumerState<MainPage> {
   @override
   Widget build(BuildContext context) {
     final navState = ref.watch(navStateProvider);
+    List<_BottomData> _bottomItemData = [
+      _BottomData(S.of(context).tab_home, Icons.home),
+      _BottomData(S.of(context).tab_project, Icons.local_fire_department),
+      _BottomData(S.of(context).tab_category, Icons.category),
+      _BottomData(S.of(context).tab_me, Icons.person)
+    ];
     return Scaffold(
       appBar: navState.index != 3 ? AppBar(
         title: Text(_bottomItemData[navState.index].label),
@@ -87,8 +89,7 @@ class _MainPageState extends ConsumerState<MainPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
           items: [
-            ..._bottomItemData.map((e) => _bottomItem(
-                e, Theme.of(context).bottomNavigationBarTheme.backgroundColor))
+            ..._bottomItemData.map((e) => _bottomItem(e.label, e.iconData))
           ],
           onTap: (index) {
             _changeNavIndex(index);
@@ -102,11 +103,11 @@ class _MainPageState extends ConsumerState<MainPage> {
     _pageController.jumpToPage(index);
   }
 
-  BottomNavigationBarItem _bottomItem(_BottomData data, Color? background) {
+  BottomNavigationBarItem _bottomItem(String label, IconData iconData) {
     return BottomNavigationBarItem(
-        icon: Icon(data.iconData),
-        label: data.label,
-        backgroundColor: background);
+        icon: Icon(iconData),
+        label: label,
+        backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor);
   }
 }
 

@@ -6,7 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_wanandroid/app_providers/theme_provider/themes.dart';
 import 'package:flutter_wanandroid/app_providers/theme_provider/themes_provider.dart';
 import 'package:flutter_wanandroid/app_providers/user_provider/user_provider.dart';
+import 'package:flutter_wanandroid/generated/l10n.dart';
 import 'package:flutter_wanandroid/ui/login/login_page.dart';
+import 'package:flutter_wanandroid/ui/me/language/language_page.dart';
+import 'package:flutter_wanandroid/ui/me/language/provider/language_provider.dart';
 import 'package:flutter_wanandroid/utils/navigate_util.dart';
 
 
@@ -18,6 +21,7 @@ class MePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeModeState = ref.watch(themesProvider);
+    final languageState = ref.watch(languageProvider);
     SystemChrome.setSystemUIOverlayStyle(Themes.getSystemUIOverlayStyle(themeModeState.isDark));
     final userState = ref.watch(userProvider);
     return Container(
@@ -51,7 +55,7 @@ class MePage extends ConsumerWidget {
                       width: 30.w,
                     ),
                     Text(
-                      userState.user,
+                      userState.username.isNotEmpty? userState.username : S.of(context).please_login,
                       style: TextStyle(fontSize: 16.sp),
                     )
                   ],
@@ -60,9 +64,9 @@ class MePage extends ConsumerWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    _userInfoItem("收藏", userState.collects),
-                    _userInfoItem("硬币", userState.coin),
-                    _userInfoItem("排名", userState.realRank),
+                    _userInfoItem(S.of(context).collect, userState.collects),
+                    _userInfoItem(S.of(context).coin, userState.coin),
+                    _userInfoItem(S.of(context).rank, userState.realRank),
                   ],
                 )
               ],
@@ -78,15 +82,16 @@ class MePage extends ConsumerWidget {
             ),
             child: Column(
               children: [
-                _settingCell(Icons.mode_night_rounded, "夜间模式",
+                _settingCell(Icons.mode_night_rounded, S.of(context).dark_mode,
                     selected: themeModeState.isDark,
                     switchAction: (value) {
                       ref.read(themesProvider.notifier).changeTheme(value);
                     }),
                 Divider(height: 1.h),
-                _settingCell(Icons.language, "语言",
+                _settingCell(Icons.language, S.of(context).language, content: languageState.language,
                     onTap: () {
                       //页面跳转
+                      navigateTo(context, const LanguagePage());
                     })
               ],
             ),
@@ -106,15 +111,17 @@ class MePage extends ConsumerWidget {
   }
 
   Widget _settingCell(IconData icon, String title,
-      {bool? selected, ValueChanged<bool>? switchAction, VoidCallback? onTap}) {
+      {bool? selected, ValueChanged<bool>? switchAction, VoidCallback? onTap, String? content}) {
     return InkWell(
       onTap: onTap,
       child: SizedBox(
-        height: 40.h,
+        height: 45.h,
         child: Row(children: [
           Icon(icon, size: 25.w),
           SizedBox(width: 10.w,),
           Expanded(child: Text(title),),
+          if (content!= null) Text(content),
+          SizedBox(width: 10.w,),
           selected == null
               ? const Icon(Icons.arrow_forward_ios_rounded)
               : CupertinoSwitch(
