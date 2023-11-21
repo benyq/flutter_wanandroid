@@ -10,7 +10,8 @@ class LoginProvider extends AutoDisposeNotifier<LoginState> {
 
   Future<ApiResponse<LoginModel>> login(String username, String password) async {
     state = state.copyWith(isLoading: true);
-    final response = await ref.read(apiProvider).login(username, password);
+    final api = await ref.read(apiProvider);
+    final response = await api.login(username, password);
     if (response.isSuccess) {
       ref.read(userProvider.notifier).getUserInfo();
     }

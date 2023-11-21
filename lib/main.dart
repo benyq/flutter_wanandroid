@@ -6,7 +6,6 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:flutter_wanandroid/app_providers/theme_provider/themes.dart';
 import 'package:flutter_wanandroid/app_providers/theme_provider/themes_provider.dart';
 import 'package:flutter_wanandroid/generated/l10n.dart';
-import 'package:flutter_wanandroid/net/dio_manager.dart';
 import 'package:flutter_wanandroid/ui/splash_page.dart';
 import 'package:mmkv/mmkv.dart';
 
@@ -15,7 +14,6 @@ import 'ui/me/language/provider/language_provider.dart';
 void main() async {
   final rootDir = await MMKV.initialize();
   debugPrint("rootDir: $rootDir");
-  DioManager.getInstance().init();
   runApp(const ProviderScope(child: MyApp()));
 }
 

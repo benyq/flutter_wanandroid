@@ -21,7 +21,7 @@ class DioManager {
 
   late PersistCookieJar cookieJar;
 
-  void init() async {
+  init() async {
     var logger = LogInterceptor(responseBody: true, requestBody: true);
     _dio.interceptors.add(logger);
     final Directory appDocDir = await getApplicationDocumentsDirectory();

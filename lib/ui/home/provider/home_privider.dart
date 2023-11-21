@@ -22,19 +22,30 @@ class HomeStateNotifier extends Notifier<HomeState> {
 
   Future<void> refresh() async {
     pageIndex = 0;
-    final topArticles = await ref.read(apiProvider).getTopArticles();
-    if (topArticles.isSuccess) {
-      state = state.copyWith(articles: topArticles.data!);
-    }
-    final articles = await ref.read(apiProvider).getArticles(pageIndex);
-    if (articles.isSuccess) {
-      final data = articles.data!.datas ?? [];
-      state = state.copyWith(articles: state.articles + data);
-    }
+    final api = await ref.read(apiProvider);
+    return Future.wait([api.getTopArticles().then((topArticles) {
+      if (topArticles.isSuccess) {
+        state = state.copyWith(articles: topArticles.data!);
+      }
+      return topArticles.isSuccess;
+    }), api.getArticles(pageIndex).then((articles) {
+      if (articles.isSuccess) {
+        final data = articles.data!.datas ?? [];
+        state = state.copyWith(articles: state.articles + data);
+      }
+      return articles.isSuccess;
+    })]).then((value) {
+      final r1 = value[0];
+      final r2 = value[1];
+      debugPrint("home refresh success: ${r1 && r2}");
+    }, onError: (e){
+      debugPrint("home refresh error: $e");
+    });
   }
 
-  void getBanner() {
-    ref.read(apiProvider).banner().then((value){
+  void getBanner() async {
+    final api = await ref.read(apiProvider);
+    api.banner().then((value){
         if (value.isSuccess) {
           state = state.copyWith(banners: value.data!);
           pageIndex += 1;
@@ -44,8 +55,9 @@ class HomeStateNotifier extends Notifier<HomeState> {
     });
   }
 
-  void getTopArticles() {
-    ref.read(apiProvider).getTopArticles().then((value) {
+  void getTopArticles() async {
+    final api = await ref.read(apiProvider);
+    api.getTopArticles().then((value) {
       if (value.isSuccess) {
         state = state.copyWith(articles: value.data!);
       }
@@ -56,7 +68,8 @@ class HomeStateNotifier extends Notifier<HomeState> {
 
   void getArticles() async{
     try{
-      final response = await ref.read(apiProvider).getArticles(pageIndex);
+      final api = await ref.read(apiProvider);
+      final response = await api.getArticles(pageIndex);
       if (response.isSuccess) {
         final data = response.data!.datas ?? [];
         state = state.copyWith(articles: state.articles + data);

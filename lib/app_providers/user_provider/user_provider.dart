@@ -10,8 +10,9 @@ class UserProvider extends Notifier<UserState> {
     return const UserState();
   }
 
-  void getUserInfo() {
-    ref.read(apiProvider).getUserInfo().then((response) {
+  void getUserInfo() async{
+    final api = await ref.read(apiProvider);
+    api.getUserInfo().then((response) {
       if (response.isSuccess) {
         var data = response.data!;
         state = state.copyWith(
