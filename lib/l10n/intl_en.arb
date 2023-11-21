@@ -9,6 +9,6 @@
   "language": "Language",
   "save": "Save",
   "dark_mode": "Dark Mode",
-  "please_login": "Login First, Please"
-
+  "please_login": "Login First, Please",
+  "exit_login": "Log Out"
 }

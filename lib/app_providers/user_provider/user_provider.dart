@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_wanandroid/app_providers/third_provider/api_provider.dart';
 import 'package:flutter_wanandroid/app_providers/user_provider/user_state.dart';
+import 'package:flutter_wanandroid/net/dio_manager.dart';
 
 class UserProvider extends Notifier<UserState> {
   @override
@@ -25,6 +26,11 @@ class UserProvider extends Notifier<UserState> {
     }).catchError((e) {
       debugPrint('getUserInfo error: $e');
     });
+  }
+
+  void logout() {
+    DioManager.getInstance().deleteCookie();
+    state = const UserState();
   }
 }
 

@@ -9,5 +9,6 @@
   "language": "语言",
   "save": "保存",
   "dark_mode": "夜间模式",
-  "please_login": "请先登录"
+  "please_login": "请先登录",
+  "exit_login": "退出登录"
 }

@@ -19,12 +19,14 @@ class DioManager {
   late WanAndroidService _androidService;
   WanAndroidService get androidService => _androidService;
 
+  late PersistCookieJar cookieJar;
+
   void init() async {
     var logger = LogInterceptor(responseBody: true, requestBody: true);
     _dio.interceptors.add(logger);
     final Directory appDocDir = await getApplicationDocumentsDirectory();
     final String appDocPath = appDocDir.path;
-    final cookieJar = PersistCookieJar(
+    cookieJar = PersistCookieJar(
       ignoreExpires: true,
       storage: FileStorage("$appDocPath/.cookies/"),
     );
@@ -32,6 +34,9 @@ class DioManager {
     _androidService = WanAndroidService(_dio);
   }
 
+  void deleteCookie() {
+    cookieJar.deleteAll();
+  }
 }
 
 WanAndroidService get androidService => DioManager.getInstance().androidService;

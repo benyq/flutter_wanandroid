@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "coin": MessageLookupByLibrary.simpleMessage("Coin"),
         "collect": MessageLookupByLibrary.simpleMessage("Collect"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+        "exit_login": MessageLookupByLibrary.simpleMessage("Log Out"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "please_login":
             MessageLookupByLibrary.simpleMessage("Login First, Please"),

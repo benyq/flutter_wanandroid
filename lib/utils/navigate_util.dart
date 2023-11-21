@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-void navigateTo(BuildContext context, Widget page) {
-  Navigator.of(context).push(
+Future<T?> navigateTo<T>(BuildContext context, Widget page) {
+  return Navigator.of(context).push(
     PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) => page,
         transitionsBuilder:

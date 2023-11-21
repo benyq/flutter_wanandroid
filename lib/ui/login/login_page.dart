@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
+import 'package:flutter_wanandroid/app_providers/theme_provider/themes_provider.dart';
 import 'package:flutter_wanandroid/net/api_response.dart';
 import 'package:flutter_wanandroid/net/model/login_model.dart';
 import 'package:flutter_wanandroid/ui/login/provider/login_provider.dart';
@@ -15,10 +17,12 @@ class LoginPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<LoginPage> {
   late TextEditingController _usernameController;
   late TextEditingController _pwdController;
+  bool isDark = false;
 
   @override
   void initState() {
     super.initState();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.blue));
     _usernameController = TextEditingController();
     _pwdController = TextEditingController();
   }
@@ -33,6 +37,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final loginState = ref.watch(authProvider);
+    final themeModeState = ref.watch(themesProvider);
     ref.listen(authProvider, (previous, next) {
       if (next.isLoading) {
         _showLoading();
@@ -84,6 +89,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             BoxConstraints(minWidth: 35, maxWidth: 50),
                       ),
                       onChanged: _onTextChanged,
+                      style: themeModeState.isDark? const TextStyle(color: Colors.black) : null,
                     ),
                     TextField(
                       controller: _pwdController,
@@ -99,6 +105,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       //密码模式
                       obscureText: loginState.obscureText,
                       onChanged: _onTextChanged,
+                      style: themeModeState.isDark? const TextStyle(color: Colors.black) : null,
                     ),
                     const SizedBox(height: 40),
                     ElevatedButton(

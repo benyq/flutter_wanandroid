@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "coin": MessageLookupByLibrary.simpleMessage("硬币"),
         "collect": MessageLookupByLibrary.simpleMessage("收藏"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("夜间模式"),
+        "exit_login": MessageLookupByLibrary.simpleMessage("退出登录"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
         "please_login": MessageLookupByLibrary.simpleMessage("请先登录"),
         "rank": MessageLookupByLibrary.simpleMessage("排名"),
