@@ -4,6 +4,7 @@ import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_wanandroid/generated/l10n.dart';
 import 'package:flutter_wanandroid/net/model/article_model.dart';
 import 'package:flutter_wanandroid/ui/article/article_page.dart';
 import 'package:flutter_wanandroid/ui/home/provider/home_privider.dart';
@@ -58,7 +59,7 @@ class _HomePageState extends ConsumerState<HomePage>
               items: [
                 ...homeState.banners.map((e) => GestureDetector(
                       onTap: () {
-                        _navigateToArticlePage(e.title, e.url);
+                        _navigateToArticlePage(e.title, e.url, e.id);
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
@@ -77,7 +78,7 @@ class _HomePageState extends ConsumerState<HomePage>
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return _articleItem(homeState.articles[index]);
+                return _articleItem(context, homeState.articles[index]);
               },
               childCount: homeState.articles.length,
             ),
@@ -98,20 +99,20 @@ class _HomePageState extends ConsumerState<HomePage>
   @override
   bool get wantKeepAlive => true;
 
-  Widget _articleItem(ArticleModel model) {
+  Widget _articleItem(BuildContext context, ArticleModel model) {
 
     String authorName(ArticleModel model) {
       if (model.author.isNotEmpty) {
-        return '作者 : ${model.author}';
+        return '${S.of(context).author} : ${model.author}';
       }else {
-        return '分享者 : ${model.shareUser}';
+        return '${S.of(context).sharer} : ${model.shareUser}';
       }
     }
 
     return GestureDetector(
         behavior: HitTestBehavior.opaque,
       onTap: () {
-        _navigateToArticlePage(model.title, model.link);
+        _navigateToArticlePage(model.title, model.link, model.id);
       },
       child: Container(
         margin: EdgeInsets.only(left: 10.w, right: 10.w, bottom: 10.h),
@@ -128,13 +129,7 @@ class _HomePageState extends ConsumerState<HomePage>
             SizedBox(height: 5.h),
             Text(model.title, maxLines: 2, overflow: TextOverflow.ellipsis),
             SizedBox(height: 5.h),
-            Row(
-              children: [
-                Text("${model.superChapterName}-${model.chapterName}"),
-                const Spacer(),
-                if (model.collect) const Icon(Icons.favorite)
-              ],
-            ),
+            Text("${model.superChapterName}-${model.chapterName}", style: TextStyle(fontSize: 12.sp), overflow: TextOverflow.ellipsis, maxLines: 1,),
             SizedBox(height: 10.h),
             Divider(height: 1.h),
           ],
@@ -143,7 +138,7 @@ class _HomePageState extends ConsumerState<HomePage>
     );
   }
 
-  void _navigateToArticlePage(String title, String url) {
-    navigateTo(context, ArticlePage(title: title, url:url));
+  void _navigateToArticlePage(String title, String url, int articleId) {
+    navigateTo(context, ArticlePage(title: title, url:url, articleId: articleId,));
   }
 }

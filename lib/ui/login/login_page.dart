@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:flutter_wanandroid/app_providers/theme_provider/themes_provider.dart';
+import 'package:flutter_wanandroid/generated/l10n.dart';
 import 'package:flutter_wanandroid/net/api_response.dart';
 import 'package:flutter_wanandroid/net/model/login_model.dart';
 import 'package:flutter_wanandroid/ui/login/provider/login_provider.dart';
@@ -82,11 +83,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   children: [
                     TextField(
                       controller: _usernameController,
-                      decoration: const InputDecoration(
-                        labelText: "用户名",
-                        prefixIcon: Icon(Icons.perm_identity),
+                      decoration: InputDecoration(
+                        labelText: S.of(context).username,
+                        prefixIcon: const Icon(Icons.perm_identity),
                         prefixIconConstraints:
-                            BoxConstraints(minWidth: 35, maxWidth: 50),
+                          const BoxConstraints(minWidth: 35, maxWidth: 50),
                       ),
                       onChanged: _onTextChanged,
                       style: themeModeState.isDark? const TextStyle(color: Colors.black) : null,
@@ -94,7 +95,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     TextField(
                       controller: _pwdController,
                       decoration: InputDecoration(
-                          labelText: "密码",
+                          labelText: S.of(context).password,
                           prefixIcon: const Icon(Icons.lock_outline, size: 28,),
                           prefixIconConstraints:
                               const BoxConstraints(minWidth: 35, maxWidth: 50),
@@ -120,7 +121,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               });
                             }
                           : null,
-                      child: const Text("登录"),
+                      child: Text(S.of(context).login),
                     ),
                     const SizedBox(height: 10),
                   ],

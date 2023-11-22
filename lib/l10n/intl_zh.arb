@@ -10,5 +10,14 @@
   "save": "保存",
   "dark_mode": "夜间模式",
   "please_login": "请先登录",
-  "exit_login": "退出登录"
+  "exit_login": "退出登录",
+  "login": "登录",
+  "username": "用户名",
+  "password": "密码",
+  "delete_article": "要将文章从收藏夹移除吗",
+  "tips": "提示",
+  "cancel": "取消",
+  "confirm": "确定",
+  "author": "作者",
+  "sharer": "分享者"
 }

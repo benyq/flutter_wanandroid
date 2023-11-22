@@ -22,17 +22,26 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "author": MessageLookupByLibrary.simpleMessage("作者"),
+        "cancel": MessageLookupByLibrary.simpleMessage("取消"),
         "coin": MessageLookupByLibrary.simpleMessage("硬币"),
         "collect": MessageLookupByLibrary.simpleMessage("收藏"),
+        "confirm": MessageLookupByLibrary.simpleMessage("确定"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("夜间模式"),
+        "delete_article": MessageLookupByLibrary.simpleMessage("要将文章从收藏夹移除吗"),
         "exit_login": MessageLookupByLibrary.simpleMessage("退出登录"),
         "language": MessageLookupByLibrary.simpleMessage("语言"),
+        "login": MessageLookupByLibrary.simpleMessage("登录"),
+        "password": MessageLookupByLibrary.simpleMessage("密码"),
         "please_login": MessageLookupByLibrary.simpleMessage("请先登录"),
         "rank": MessageLookupByLibrary.simpleMessage("排名"),
         "save": MessageLookupByLibrary.simpleMessage("保存"),
+        "sharer": MessageLookupByLibrary.simpleMessage("分享者"),
         "tab_category": MessageLookupByLibrary.simpleMessage("分类"),
         "tab_home": MessageLookupByLibrary.simpleMessage("首页"),
         "tab_me": MessageLookupByLibrary.simpleMessage("我的"),
-        "tab_project": MessageLookupByLibrary.simpleMessage("项目")
+        "tab_project": MessageLookupByLibrary.simpleMessage("项目"),
+        "tips": MessageLookupByLibrary.simpleMessage("提示"),
+        "username": MessageLookupByLibrary.simpleMessage("用户名")
       };
 }

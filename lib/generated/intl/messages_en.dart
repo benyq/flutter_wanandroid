@@ -22,18 +22,28 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "author": MessageLookupByLibrary.simpleMessage("Author"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "coin": MessageLookupByLibrary.simpleMessage("Coin"),
         "collect": MessageLookupByLibrary.simpleMessage("Collect"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
+        "delete_article": MessageLookupByLibrary.simpleMessage(
+            "Remove the article from your favorites?"),
         "exit_login": MessageLookupByLibrary.simpleMessage("Log Out"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
         "please_login":
             MessageLookupByLibrary.simpleMessage("Login First, Please"),
         "rank": MessageLookupByLibrary.simpleMessage("Rank"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "sharer": MessageLookupByLibrary.simpleMessage("Sharer"),
         "tab_category": MessageLookupByLibrary.simpleMessage("Category"),
         "tab_home": MessageLookupByLibrary.simpleMessage("Home"),
         "tab_me": MessageLookupByLibrary.simpleMessage("Me"),
-        "tab_project": MessageLookupByLibrary.simpleMessage("Project")
+        "tab_project": MessageLookupByLibrary.simpleMessage("Project"),
+        "tips": MessageLookupByLibrary.simpleMessage("Tips"),
+        "username": MessageLookupByLibrary.simpleMessage("Username")
       };
 }

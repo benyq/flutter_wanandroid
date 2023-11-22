@@ -10,5 +10,14 @@
   "save": "Save",
   "dark_mode": "Dark Mode",
   "please_login": "Login First, Please",
-  "exit_login": "Log Out"
+  "exit_login": "Log Out",
+  "login": "Login",
+  "username": "Username",
+  "password": "Password",
+  "delete_article": "Remove the article from your favorites?",
+  "tips": "Tips",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "author": "Author",
+  "sharer": "Sharer"
 }

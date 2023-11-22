@@ -8,6 +8,7 @@ import 'package:flutter_wanandroid/app_providers/theme_provider/themes_provider.
 import 'package:flutter_wanandroid/app_providers/user_provider/user_provider.dart';
 import 'package:flutter_wanandroid/generated/l10n.dart';
 import 'package:flutter_wanandroid/ui/login/login_page.dart';
+import 'package:flutter_wanandroid/ui/me/collect/collect_page.dart';
 import 'package:flutter_wanandroid/ui/me/language/language_page.dart';
 import 'package:flutter_wanandroid/ui/me/language/provider/language_provider.dart';
 import 'package:flutter_wanandroid/utils/navigate_util.dart';
@@ -34,12 +35,7 @@ class MePage extends ConsumerWidget {
           children: [
             GestureDetector(
               onTap: () {
-                if (!userState.isLoggedIn) {
-                  navigateTo(context, const LoginPage()).then((value) {
-                    SystemChrome.setSystemUIOverlayStyle(
-                        Themes.getSystemUIOverlayStyle(themeModeState.isDark));
-                  });
-                }
+                _checkLogin(context, ref);
               },
               child: Container(
                 margin: EdgeInsets.only(top: 50.h, left: 15.w, right: 15.w),
@@ -75,10 +71,20 @@ class MePage extends ConsumerWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        _userInfoItem(
-                            S.of(context).collect, userState.collects),
-                        _userInfoItem(S.of(context).coin, userState.coin),
-                        _userInfoItem(S.of(context).rank, userState.realRank),
+                        GestureDetector(
+                            onTap: () {
+                              _checkLogin(context, ref, page: const CollectPage());
+                            },
+                            child: _userInfoItem(
+                                S.of(context).collect, userState.collects)),
+                        GestureDetector(
+                            onTap: () => _checkLogin(context, ref),
+                            child: _userInfoItem(
+                                S.of(context).coin, userState.coin)),
+                        GestureDetector(
+                            onTap: () => _checkLogin(context, ref),
+                            child: _userInfoItem(
+                                S.of(context).rank, userState.rank)),
                       ],
                     )
                   ],
@@ -109,12 +115,16 @@ class MePage extends ConsumerWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20.h,),
-            ElevatedButton(onPressed: (){
-              if (userState.isLoggedIn) {
-                ref.read(userProvider.notifier).logout();
-              }
-            }, child: Text(S.of(context).exit_login))
+            SizedBox(
+              height: 20.h,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  if (userState.isLoggedIn) {
+                    ref.read(userProvider.notifier).logout();
+                  }
+                },
+                child: Text(S.of(context).exit_login)),
           ],
         ),
       ),
@@ -164,5 +174,27 @@ class MePage extends ConsumerWidget {
         ]),
       ),
     );
+  }
+
+  _checkLogin(BuildContext context, WidgetRef ref, {Widget? page}) {
+    final userState = ref.read(userProvider);
+    final themeModeState = ref.read(themesProvider);
+    if (!userState.isLoggedIn) {
+      navigateTo(context, const LoginPage()).then((value) {
+        SystemChrome.setSystemUIOverlayStyle(
+            Themes.getSystemUIOverlayStyle(themeModeState.isDark));
+      });
+    } else {
+      if (page != null) {
+        _navigateTo(context, themeModeState.isDark, page);
+      }
+    }
+  }
+
+  _navigateTo(BuildContext context, bool isDark, Widget page) {
+    navigateTo(context, page).then((value) {
+      SystemChrome.setSystemUIOverlayStyle(
+          Themes.getSystemUIOverlayStyle(isDark));
+    });
   }
 }

@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_wanandroid/app_providers/user_provider/user_provider.dart';
+import 'package:flutter_wanandroid/ui/me/collect/provider/collect_provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 
 final blackList = ['https://www.taobao.com/'];
 
-class ArticlePage extends StatefulWidget {
+class ArticlePage extends ConsumerStatefulWidget {
   final String title;
   final String url;
+  final int articleId;
 
-  const ArticlePage({super.key, required this.url, required this.title});
+  const ArticlePage({super.key, required this.url, required this.title, required this.articleId});
 
   @override
-  State<ArticlePage> createState() => _ArticlePageState();
+  ConsumerState<ArticlePage> createState() => _ArticlePageState();
 }
 
-class _ArticlePageState extends State<ArticlePage> {
+class _ArticlePageState extends ConsumerState<ArticlePage> {
   late final WebViewController _controller;
 
   @override
@@ -91,6 +95,7 @@ class _ArticlePageState extends State<ArticlePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isCollected = ref.watch(userProvider).collectIds?.contains(widget.articleId)?? false;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -100,21 +105,20 @@ class _ArticlePageState extends State<ArticlePage> {
         ],
       ),
       body: WebViewWidget(controller: _controller),
-      floatingActionButton: favoriteButton(),
+      floatingActionButton: favoriteButton(isCollected),
     );
   }
 
-  Widget favoriteButton() {
+  Widget favoriteButton(bool isCollected) {
     return FloatingActionButton(
       onPressed: () async {
-        final String? url = await _controller.currentUrl();
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Favorited $url')),
-          );
+        if (isCollected) {
+          await ref.read(collectStateProvider.notifier).deleteCollectedArticle(widget.articleId);
+        }else {
+          await ref.read(collectStateProvider.notifier).collectArticle(widget.articleId);
         }
       },
-      child: const Icon(Icons.favorite),
+      child: isCollected? const Icon(Icons.favorite) : const Icon(Icons.favorite_border_rounded),
     );
   }
 }

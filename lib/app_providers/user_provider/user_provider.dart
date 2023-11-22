@@ -10,6 +10,10 @@ class UserProvider extends Notifier<UserState> {
     return const UserState();
   }
 
+  bool isCollected(int id) {
+    return state.collectIds?.contains(id)?? false;
+  }
+
   void getUserInfo() async{
     final api = await ref.read(apiProvider);
     api.getUserInfo().then((response) {
@@ -32,6 +36,21 @@ class UserProvider extends Notifier<UserState> {
   void logout() {
     DioManager.getInstance().deleteCookie();
     state = const UserState();
+  }
+
+  void removeCollect(int id) {
+    final articles = state.collectIds?.where((element) => element!= id).toList();
+    state = state.copyWith(collectIds: articles);
+  }
+
+  void addCollect(int id) {
+    if (state.collectIds != null) {
+      if (!state.collectIds!.contains(id)) {
+        state = state.copyWith(collectIds: state.collectIds!..add(id));
+      }
+    }else {
+      state = state.copyWith(collectIds: [id]);
+    }
   }
 }
 
