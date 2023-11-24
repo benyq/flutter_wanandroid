@@ -35,7 +35,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
   @override
   void initState() {
     super.initState();
-    _controller = EasyRefreshController(controlFinishLoad: true);
+    _controller = EasyRefreshController(controlFinishLoad: true, controlFinishRefresh: true);
     _editingController = TextEditingController();
   }
 
@@ -164,8 +164,14 @@ class _SearchPageState extends ConsumerState<SearchPage> {
               visible: searchState.isSearching,
               child: EasyRefresh(
                 header: const CupertinoHeader(),
-                footer: const CupertinoFooter(),
+                footer: const CupertinoFooter(processedDuration: Duration(milliseconds: 500)),
+                callLoadOverOffset: 100.h,
                 controller: _controller,
+                onLoad: searchState.isEnd? null: () async {
+                  _controller.resetFooter();
+                  await ref.read(searchProvider.notifier).loadMore();
+                  _controller.finishLoad(searchState.isEnd?IndicatorResult.noMore: IndicatorResult.success);
+                },
                 child: ListView.builder(
                   itemCount: searchState.searchData.length,
                   itemBuilder: (context, index) {
@@ -174,10 +180,6 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                     },);
                   },
                 ),
-                onLoad: () async {
-                  await ref.read(searchProvider.notifier).loadMore();
-                  _controller.finishLoad();
-                },
               ),
             )
           ],

@@ -44,7 +44,8 @@ class _HomePageState extends ConsumerState<HomePage>
     final homeState = ref.watch(homeStateProvider);
     return EasyRefresh(
       header: const CupertinoHeader(),
-      footer: const CupertinoFooter(),
+      footer: const CupertinoFooter(processedDuration: Duration(milliseconds: 500)),
+      callLoadOverOffset: 100.h,
       controller: _controller,
       child: CustomScrollView(
         slivers: [

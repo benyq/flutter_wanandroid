@@ -43,7 +43,8 @@ class _CollectPageState extends ConsumerState<CollectPage> {
       body: EasyRefresh(
         controller: _controller,
         header: const CupertinoHeader(),
-        footer: const CupertinoFooter(),
+        footer: const CupertinoFooter(processedDuration: Duration(milliseconds: 500)),
+        callLoadOverOffset: 100.h,
         onRefresh: () async {
           await ref.read(collectStateProvider.notifier).refresh();
           _controller.finishRefresh();

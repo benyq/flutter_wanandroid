@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_wanandroid/app_providers/third_provider/api_provider.dart';
 import 'package:flutter_wanandroid/net/model/hot_word_model.dart';
@@ -28,10 +29,10 @@ class SearchNotifier extends AutoDisposeNotifier<SearchState> {
   int _page = 0;
   String _searchText = '';
 
-  void search(String searchText, {bool refresh = true}) async {
-    _page = 0;
-    _searchText = searchText;
+  Future<void> search(String searchText, {bool refresh = true}) async {
     if (refresh) {
+      _page = 0;
+      _searchText = searchText;
       state = state.copyWith(searchData: [], isEnd: false, isSearching: true);
     }
     final api = await ref.read(apiProvider);
@@ -43,7 +44,7 @@ class SearchNotifier extends AutoDisposeNotifier<SearchState> {
         element.title = _removeHighLight(element.title);
       }
       state = state.copyWith(
-          searchData: refresh ? state.searchData + data : data,
+          searchData: refresh ? data : state.searchData + data,
           isEnd: response.data!.over);
     }
     if (refresh) {
@@ -52,7 +53,7 @@ class SearchNotifier extends AutoDisposeNotifier<SearchState> {
   }
 
   Future loadMore() async {
-    search(_searchText, refresh: false);
+    return search(_searchText, refresh: false);
   }
 
   void exitSearch() {
