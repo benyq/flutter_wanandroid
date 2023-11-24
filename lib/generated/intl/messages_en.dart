@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete_article": MessageLookupByLibrary.simpleMessage(
             "Remove the article from your favorites?"),
         "exit_login": MessageLookupByLibrary.simpleMessage("Log Out"),
+        "input_hint":
+            MessageLookupByLibrary.simpleMessage("Please type key words"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -38,6 +40,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Login First, Please"),
         "rank": MessageLookupByLibrary.simpleMessage("Rank"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "search_history":
+            MessageLookupByLibrary.simpleMessage("Search History"),
+        "search_hot": MessageLookupByLibrary.simpleMessage("Hot Key"),
         "sharer": MessageLookupByLibrary.simpleMessage("Sharer"),
         "tab_category": MessageLookupByLibrary.simpleMessage("Category"),
         "tab_home": MessageLookupByLibrary.simpleMessage("Home"),

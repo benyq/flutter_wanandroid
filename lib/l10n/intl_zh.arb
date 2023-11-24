@@ -19,5 +19,8 @@
   "cancel": "取消",
   "confirm": "确定",
   "author": "作者",
-  "sharer": "分享者"
+  "sharer": "分享者",
+  "input_hint": "请输入关键字",
+  "search_history": "搜索历史",
+  "search_hot": "热门搜索"
 }

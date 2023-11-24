@@ -34,7 +34,7 @@ class ArticleModel {
   int publishTime;
   int realSuperChapterId;
   int selfVisible;
-  int shareDate;
+  int? shareDate;
   String shareUser;
   int superChapterId;
   String superChapterName;
@@ -71,7 +71,7 @@ class ArticleModel {
     required this.publishTime,
     required this.realSuperChapterId,
     required this.selfVisible,
-    required this.shareDate,
+    this.shareDate,
     required this.shareUser,
     required this.superChapterId,
     required this.superChapterName,

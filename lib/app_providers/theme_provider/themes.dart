@@ -19,6 +19,7 @@ class Themes {
         titleTextStyle: const TextStyle(color: Colors.black, fontSize: 18),
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.black),
+        toolbarTextStyle: const TextStyle(color: Colors.black),
         systemOverlayStyle: SystemUiOverlayStyle(
             systemNavigationBarColor: Colors.black,
             systemNavigationBarIconBrightness: Brightness.light,
@@ -46,6 +47,7 @@ class Themes {
         titleTextStyle: const TextStyle(color: Colors.white, fontSize: 18),
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white),
+        toolbarTextStyle: const TextStyle(color: Colors.white),
         systemOverlayStyle: SystemUiOverlayStyle(
             systemNavigationBarColor: Colors.black,
             systemNavigationBarIconBrightness: Brightness.light,

@@ -7,7 +7,10 @@ import 'package:flutter_wanandroid/ui/category/category_page.dart';
 import 'package:flutter_wanandroid/ui/home/home_page.dart';
 import 'package:flutter_wanandroid/ui/me/me_page.dart';
 import 'package:flutter_wanandroid/ui/project/project_page.dart';
+import 'package:flutter_wanandroid/utils/navigate_util.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import 'search/search_page.dart';
 
 class MainPage extends ConsumerStatefulWidget {
   const MainPage({super.key});
@@ -59,14 +62,7 @@ class _MainPageState extends ConsumerState<MainPage> {
             offstage: navState.index != 0,
             child: InkWell(
                 onTap: () {
-                  Fluttertoast.showToast(
-                      msg: "This is Center Short Toast",
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.CENTER,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0);
+                  navigateTo(context, const SearchPage());
                 },
                 child: const SizedBox.square(
                   dimension: 50,
@@ -77,6 +73,7 @@ class _MainPageState extends ConsumerState<MainPage> {
                 )),
           )
         ],
+        elevation: 0,
         toolbarHeight: 50,
       ): null,
       body: PageView(

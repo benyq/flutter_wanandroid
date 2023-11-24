@@ -19,5 +19,8 @@
   "cancel": "Cancel",
   "confirm": "Confirm",
   "author": "Author",
-  "sharer": "Sharer"
+  "sharer": "Sharer",
+  "input_hint": "Please type key words",
+  "search_history": "Search History",
+  "search_hot": "Hot Key"
 }

@@ -259,6 +259,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Please type key words`
+  String get input_hint {
+    return Intl.message(
+      'Please type key words',
+      name: 'input_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search History`
+  String get search_history {
+    return Intl.message(
+      'Search History',
+      name: 'search_history',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hot Key`
+  String get search_hot {
+    return Intl.message(
+      'Hot Key',
+      name: 'search_hot',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

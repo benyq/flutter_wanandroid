@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_wanandroid/generated/l10n.dart';
 import 'package:flutter_wanandroid/net/model/article_model.dart';
 import 'package:flutter_wanandroid/ui/article/article_page.dart';
+import 'package:flutter_wanandroid/ui/home/article_item.dart';
 import 'package:flutter_wanandroid/ui/home/provider/home_privider.dart';
 import 'package:flutter_wanandroid/utils/navigate_util.dart';
 
@@ -78,7 +79,9 @@ class _HomePageState extends ConsumerState<HomePage>
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return _articleItem(context, homeState.articles[index]);
+                return ArticleItem(homeState.articles[index], onTap: (model){
+                  navigateTo(context, ArticlePage(title: model.title, url:model.link, articleId: model.id,));
+                },);
               },
               childCount: homeState.articles.length,
             ),

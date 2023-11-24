@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_wanandroid/net/api_response.dart';
 import 'package:flutter_wanandroid/net/model/collect_article_model.dart';
+import 'package:flutter_wanandroid/net/model/hot_word_model.dart';
 import 'package:flutter_wanandroid/net/page_model.dart';
 import 'package:retrofit/dio.dart';
 import 'package:retrofit/http.dart';
@@ -39,4 +40,12 @@ abstract class WanAndroidService {
 
   @POST('lg/uncollect_originId/{id}/json')
   Future<ApiResponse<String>> unCollectArticle(@Path("id") int id);
+
+  @POST('article/query/{page}/json')
+  @FormUrlEncoded()
+  Future<ApiResponse<PageModel<ArticleModel>>> searchArticles(@Path() int page, @Field("k") String key);
+
+
+  @GET('hotkey/json')
+  Future<ApiResponse<List<HotWordModel>>> hotKey();
 }
