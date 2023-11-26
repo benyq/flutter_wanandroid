@@ -6,9 +6,8 @@ import 'package:flutter_wanandroid/generated/l10n.dart';
 import 'package:flutter_wanandroid/ui/category/category_page.dart';
 import 'package:flutter_wanandroid/ui/home/home_page.dart';
 import 'package:flutter_wanandroid/ui/me/me_page.dart';
-import 'package:flutter_wanandroid/ui/project/project_page.dart';
+import 'package:flutter_wanandroid/ui/project/project_tree_page.dart';
 import 'package:flutter_wanandroid/utils/navigate_util.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import 'search/search_page.dart';
 
@@ -23,7 +22,7 @@ class _MainPageState extends ConsumerState<MainPage> {
 
   static const List<Widget> _pages = [
     HomePage(),
-    ProjectPage(),
+    ProjectTreePage(),
     CategoryPage(),
     MePage()
   ];

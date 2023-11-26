@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part '../generated/page_model.g.dart';
+part 'generated/page_model.g.dart';
 
 @JsonSerializable(genericArgumentFactories: true)
 class PageModel<T> {

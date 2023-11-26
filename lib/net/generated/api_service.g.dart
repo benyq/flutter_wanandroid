@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../net/api_service.dart';
+part of '../api_service.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -355,6 +355,77 @@ class _WanAndroidService implements WanAndroidService {
                   (i) => HotWordModel.fromJson(i as Map<String, dynamic>))
               .toList()
           : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<ApiResponse<List<ProjectTreeModel>>> projectTree() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<List<ProjectTreeModel>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'project/tree/json',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ApiResponse<List<ProjectTreeModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<ProjectTreeModel>(
+                  (i) => ProjectTreeModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
+    );
+    return value;
+  }
+
+  @override
+  Future<ApiResponse<PageModel<ArticleModel>>> getProjectArticles(
+    int page,
+    int categoryId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'cid': categoryId};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<PageModel<ArticleModel>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'project/list/${page}/json',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ApiResponse<PageModel<ArticleModel>>.fromJson(
+      _result.data!,
+      (json) => PageModel<ArticleModel>.fromJson(
+        json as Map<String, dynamic>,
+        (json) => ArticleModel.fromJson(json as Map<String, dynamic>),
+      ),
     );
     return value;
   }

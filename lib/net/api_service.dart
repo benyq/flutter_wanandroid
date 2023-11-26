@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_wanandroid/net/api_response.dart';
 import 'package:flutter_wanandroid/net/model/collect_article_model.dart';
 import 'package:flutter_wanandroid/net/model/hot_word_model.dart';
+import 'package:flutter_wanandroid/net/model/project_tree_model.dart';
 import 'package:flutter_wanandroid/net/page_model.dart';
 import 'package:retrofit/dio.dart';
 import 'package:retrofit/http.dart';
@@ -10,7 +11,7 @@ import 'model/banner_model.dart';
 import 'model/login_model.dart';
 import 'model/user_model.dart';
 
-part '../generated/api_service.g.dart';
+part 'generated/api_service.g.dart';
 
 @RestApi(baseUrl: "https://www.wanandroid.com/")
 abstract class WanAndroidService {
@@ -45,7 +46,12 @@ abstract class WanAndroidService {
   @FormUrlEncoded()
   Future<ApiResponse<PageModel<ArticleModel>>> searchArticles(@Path() int page, @Field("k") String key);
 
-
   @GET('hotkey/json')
   Future<ApiResponse<List<HotWordModel>>> hotKey();
+
+  @GET('project/tree/json')
+  Future<ApiResponse<List<ProjectTreeModel>>> projectTree();
+  
+  @GET('project/list/{page}/json')
+  Future<ApiResponse<PageModel<ArticleModel>>> getProjectArticles(@Path('page') int page, @Query('cid') int categoryId);
 }
