@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,15 +16,6 @@ class ProjectTreePage extends ConsumerStatefulWidget {
 
 class _ProjectTreePageState extends ConsumerState<ProjectTreePage>
     with AutomaticKeepAliveClientMixin {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +25,7 @@ class _ProjectTreePageState extends ConsumerState<ProjectTreePage>
     return projectTree.when(
       loading: () => Center(
         child: SizedBox.square(
-          dimension: 80.w,
+          dimension: 60.w,
           child: const CircularProgressIndicator(),
         ),
       ),

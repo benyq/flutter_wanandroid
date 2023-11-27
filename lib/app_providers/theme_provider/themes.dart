@@ -68,4 +68,12 @@ class Themes {
       return lightTheme.appBarTheme.systemOverlayStyle!;
     }
   }
+
+  static Color getBackgroundColor(bool isDark) {
+    if (isDark) {
+      return darkColor;
+    } else {
+      return lightColor;
+    }
+  }
 }
