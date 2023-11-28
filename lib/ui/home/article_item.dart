@@ -26,7 +26,7 @@ class ArticleItem extends StatelessWidget {
         onTap?.call(model);
       },
       child: Container(
-        margin: EdgeInsets.only(left: 10.w, right: 10.w, bottom: 10.h),
+        margin: EdgeInsets.only(top: 10.h, left: 10.w, right: 10.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../project_provider.dart';
+part of '../category_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$projectTreeHash() => r'0fa2e628c8263b07a241157f7b807c853dda69d7';
+String _$categoryHash() => r'f33b8c1ad8e8f3cc659eddb6aca957ecb8fddbba';
 
-/// See also [projectTree].
-@ProviderFor(projectTree)
-final projectTreeProvider =
-    AutoDisposeFutureProvider<List<ProjectTreeModel>>.internal(
-  projectTree,
-  name: r'projectTreeProvider',
+/// See also [category].
+@ProviderFor(category)
+final categoryProvider =
+    AutoDisposeFutureProvider<List<CategoryModel>>.internal(
+  category,
+  name: r'categoryProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$projectTreeHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$categoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef ProjectTreeRef = AutoDisposeFutureProviderRef<List<ProjectTreeModel>>;
-String _$projectNotifierHash() => r'00d31cd9543a319cfaa4182e0731300ee891c6ca';
+typedef CategoryRef = AutoDisposeFutureProviderRef<List<CategoryModel>>;
+String _$categoryNotifierHash() => r'3b6aa66d6e97fdce007f51df9c24e3b1541f800b';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -44,36 +44,36 @@ class _SystemHash {
   }
 }
 
-abstract class _$ProjectNotifier
-    extends BuildlessAutoDisposeNotifier<ProjectState> {
+abstract class _$CategoryNotifier
+    extends BuildlessAutoDisposeNotifier<CategoryState> {
   late final int cid;
 
-  ProjectState build(
+  CategoryState build(
     int cid,
   );
 }
 
-/// See also [ProjectNotifier].
-@ProviderFor(ProjectNotifier)
-const projectNotifierProvider = ProjectNotifierFamily();
+/// See also [CategoryNotifier].
+@ProviderFor(CategoryNotifier)
+const categoryNotifierProvider = CategoryNotifierFamily();
 
-/// See also [ProjectNotifier].
-class ProjectNotifierFamily extends Family<ProjectState> {
-  /// See also [ProjectNotifier].
-  const ProjectNotifierFamily();
+/// See also [CategoryNotifier].
+class CategoryNotifierFamily extends Family<CategoryState> {
+  /// See also [CategoryNotifier].
+  const CategoryNotifierFamily();
 
-  /// See also [ProjectNotifier].
-  ProjectNotifierProvider call(
+  /// See also [CategoryNotifier].
+  CategoryNotifierProvider call(
     int cid,
   ) {
-    return ProjectNotifierProvider(
+    return CategoryNotifierProvider(
       cid,
     );
   }
 
   @override
-  ProjectNotifierProvider getProviderOverride(
-    covariant ProjectNotifierProvider provider,
+  CategoryNotifierProvider getProviderOverride(
+    covariant CategoryNotifierProvider provider,
   ) {
     return call(
       provider.cid,
@@ -92,30 +92,30 @@ class ProjectNotifierFamily extends Family<ProjectState> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'projectNotifierProvider';
+  String? get name => r'categoryNotifierProvider';
 }
 
-/// See also [ProjectNotifier].
-class ProjectNotifierProvider
-    extends AutoDisposeNotifierProviderImpl<ProjectNotifier, ProjectState> {
-  /// See also [ProjectNotifier].
-  ProjectNotifierProvider(
+/// See also [CategoryNotifier].
+class CategoryNotifierProvider
+    extends AutoDisposeNotifierProviderImpl<CategoryNotifier, CategoryState> {
+  /// See also [CategoryNotifier].
+  CategoryNotifierProvider(
     int cid,
   ) : this._internal(
-          () => ProjectNotifier()..cid = cid,
-          from: projectNotifierProvider,
-          name: r'projectNotifierProvider',
+          () => CategoryNotifier()..cid = cid,
+          from: categoryNotifierProvider,
+          name: r'categoryNotifierProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$projectNotifierHash,
-          dependencies: ProjectNotifierFamily._dependencies,
+                  : _$categoryNotifierHash,
+          dependencies: CategoryNotifierFamily._dependencies,
           allTransitiveDependencies:
-              ProjectNotifierFamily._allTransitiveDependencies,
+              CategoryNotifierFamily._allTransitiveDependencies,
           cid: cid,
         );
 
-  ProjectNotifierProvider._internal(
+  CategoryNotifierProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -128,8 +128,8 @@ class ProjectNotifierProvider
   final int cid;
 
   @override
-  ProjectState runNotifierBuild(
-    covariant ProjectNotifier notifier,
+  CategoryState runNotifierBuild(
+    covariant CategoryNotifier notifier,
   ) {
     return notifier.build(
       cid,
@@ -137,10 +137,10 @@ class ProjectNotifierProvider
   }
 
   @override
-  Override overrideWith(ProjectNotifier Function() create) {
+  Override overrideWith(CategoryNotifier Function() create) {
     return ProviderOverride(
       origin: this,
-      override: ProjectNotifierProvider._internal(
+      override: CategoryNotifierProvider._internal(
         () => create()..cid = cid,
         from: from,
         name: null,
@@ -153,14 +153,14 @@ class ProjectNotifierProvider
   }
 
   @override
-  AutoDisposeNotifierProviderElement<ProjectNotifier, ProjectState>
+  AutoDisposeNotifierProviderElement<CategoryNotifier, CategoryState>
       createElement() {
-    return _ProjectNotifierProviderElement(this);
+    return _CategoryNotifierProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is ProjectNotifierProvider && other.cid == cid;
+    return other is CategoryNotifierProvider && other.cid == cid;
   }
 
   @override
@@ -172,18 +172,18 @@ class ProjectNotifierProvider
   }
 }
 
-mixin ProjectNotifierRef on AutoDisposeNotifierProviderRef<ProjectState> {
+mixin CategoryNotifierRef on AutoDisposeNotifierProviderRef<CategoryState> {
   /// The parameter `cid` of this provider.
   int get cid;
 }
 
-class _ProjectNotifierProviderElement
-    extends AutoDisposeNotifierProviderElement<ProjectNotifier, ProjectState>
-    with ProjectNotifierRef {
-  _ProjectNotifierProviderElement(super.provider);
+class _CategoryNotifierProviderElement
+    extends AutoDisposeNotifierProviderElement<CategoryNotifier, CategoryState>
+    with CategoryNotifierRef {
+  _CategoryNotifierProviderElement(super.provider);
 
   @override
-  int get cid => (origin as ProjectNotifierProvider).cid;
+  int get cid => (origin as CategoryNotifierProvider).cid;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

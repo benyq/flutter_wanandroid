@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_wanandroid/net/api_response.dart';
+import 'package:flutter_wanandroid/net/model/category_model.dart';
 import 'package:flutter_wanandroid/net/model/collect_article_model.dart';
 import 'package:flutter_wanandroid/net/model/hot_word_model.dart';
 import 'package:flutter_wanandroid/net/model/project_tree_model.dart';
@@ -24,7 +25,7 @@ abstract class WanAndroidService {
   Future<ApiResponse<List<ArticleModel>>> getTopArticles();
 
   @GET("article/list/{page}/json")
-  Future<ApiResponse<PageModel<ArticleModel>>> getArticles(@Path() int page);
+  Future<ApiResponse<PageModel<ArticleModel>>> getArticles(@Path() int page, {@Query('cid') int? cid});
 
   @POST("user/login")
   @FormUrlEncoded()
@@ -54,4 +55,8 @@ abstract class WanAndroidService {
   
   @GET('project/list/{page}/json')
   Future<ApiResponse<PageModel<ArticleModel>>> getProjectArticles(@Path('page') int page, @Query('cid') int categoryId);
+
+  @GET('tree/json')
+  Future<ApiResponse<List<CategoryModel>>> categoryTree();
+
 }

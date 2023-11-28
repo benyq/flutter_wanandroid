@@ -94,9 +94,13 @@ class _WanAndroidService implements WanAndroidService {
   }
 
   @override
-  Future<ApiResponse<PageModel<ArticleModel>>> getArticles(int page) async {
+  Future<ApiResponse<PageModel<ArticleModel>>> getArticles(
+    int page, {
+    int? cid,
+  }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'cid': cid};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -426,6 +430,41 @@ class _WanAndroidService implements WanAndroidService {
         json as Map<String, dynamic>,
         (json) => ArticleModel.fromJson(json as Map<String, dynamic>),
       ),
+    );
+    return value;
+  }
+
+  @override
+  Future<ApiResponse<List<CategoryModel>>> categoryTree() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApiResponse<List<CategoryModel>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'tree/json',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ApiResponse<List<CategoryModel>>.fromJson(
+      _result.data!,
+      (json) => json is List<dynamic>
+          ? json
+              .map<CategoryModel>(
+                  (i) => CategoryModel.fromJson(i as Map<String, dynamic>))
+              .toList()
+          : List.empty(),
     );
     return value;
   }
