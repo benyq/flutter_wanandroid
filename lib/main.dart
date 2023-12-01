@@ -49,7 +49,7 @@ class MyApp extends ConsumerWidget {
           builder: FlutterSmartDialog.init(),
         );
       },
-      child: const SplashPage(),
+        child: const SplashPage()
     );
   }
 }

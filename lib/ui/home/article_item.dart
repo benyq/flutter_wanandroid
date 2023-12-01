@@ -11,20 +11,17 @@ class ArticleItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     String authorName(ArticleModel model) {
       if (model.author.isNotEmpty) {
         return '${S.of(context).author} : ${model.author}';
-      }else {
+      } else {
         return '${S.of(context).sharer} : ${model.shareUser}';
       }
     }
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: (){
-        onTap?.call(model);
-      },
+      onTap: onTap != null ? () => onTap?.call(model) : null,
       child: Container(
         margin: EdgeInsets.only(top: 10.h, left: 10.w, right: 10.w),
         child: Column(
@@ -40,7 +37,12 @@ class ArticleItem extends StatelessWidget {
             SizedBox(height: 5.h),
             Text(model.title, maxLines: 2, overflow: TextOverflow.ellipsis),
             SizedBox(height: 5.h),
-            Text("${model.superChapterName}-${model.chapterName}", style: TextStyle(fontSize: 12.sp), overflow: TextOverflow.ellipsis, maxLines: 1,),
+            Text(
+              "${model.superChapterName}-${model.chapterName}",
+              style: TextStyle(fontSize: 12.sp),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
             SizedBox(height: 10.h),
             Divider(height: 1.h),
           ],
@@ -48,8 +50,4 @@ class ArticleItem extends StatelessWidget {
       ),
     );
   }
-
-
 }
-
-
