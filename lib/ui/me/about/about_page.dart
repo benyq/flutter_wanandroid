@@ -118,7 +118,7 @@ class _AboutPageState extends ConsumerState<AboutPage> {
       final model = value[0];
       var version = model.tagName.replaceAll('v', '');
       SmartDialog.dismiss();
-      if (!_checkVersion(version, _packageInfo.version)) {
+      if (_checkVersion(version, _packageInfo.version)) {
         debugPrint('新版本: $version');
         const tag = 'confirmUpdateTag';
         SmartDialog.show(
