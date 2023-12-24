@@ -22,8 +22,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("About"),
         "author": MessageLookupByLibrary.simpleMessage("Author"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "check_version": MessageLookupByLibrary.simpleMessage("Check Version"),
+        "check_version_loading":
+            MessageLookupByLibrary.simpleMessage("Check Loading..."),
+        "close": MessageLookupByLibrary.simpleMessage("Close"),
         "coin": MessageLookupByLibrary.simpleMessage("Coin"),
         "collect": MessageLookupByLibrary.simpleMessage("Collect"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
@@ -38,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "please_login":
             MessageLookupByLibrary.simpleMessage("Login First, Please"),
+        "project": MessageLookupByLibrary.simpleMessage("Project Website"),
         "rank": MessageLookupByLibrary.simpleMessage("Rank"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "search_history":
@@ -49,6 +55,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tab_me": MessageLookupByLibrary.simpleMessage("Me"),
         "tab_project": MessageLookupByLibrary.simpleMessage("Project"),
         "tips": MessageLookupByLibrary.simpleMessage("Tips"),
+        "update_app": MessageLookupByLibrary.simpleMessage("Update App"),
+        "update_app_fail_version": MessageLookupByLibrary.simpleMessage(
+            "The current version is already the latest version"),
         "username": MessageLookupByLibrary.simpleMessage("Username")
       };
 }

@@ -21,7 +21,7 @@ final categoryProvider =
 );
 
 typedef CategoryRef = AutoDisposeFutureProviderRef<List<CategoryModel>>;
-String _$categoryNotifierHash() => r'3b6aa66d6e97fdce007f51df9c24e3b1541f800b';
+String _$categoryNotifierHash() => r'f5efdf7e918064d00f0f1a0fb303533f5b7ce742';
 
 /// Copied from Dart SDK
 class _SystemHash {

@@ -22,8 +22,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("关于"),
         "author": MessageLookupByLibrary.simpleMessage("作者"),
         "cancel": MessageLookupByLibrary.simpleMessage("取消"),
+        "check_version": MessageLookupByLibrary.simpleMessage("检测更新"),
+        "check_version_loading":
+            MessageLookupByLibrary.simpleMessage("正在检测更新。。。"),
+        "close": MessageLookupByLibrary.simpleMessage("关闭"),
         "coin": MessageLookupByLibrary.simpleMessage("硬币"),
         "collect": MessageLookupByLibrary.simpleMessage("收藏"),
         "confirm": MessageLookupByLibrary.simpleMessage("确定"),
@@ -35,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("登录"),
         "password": MessageLookupByLibrary.simpleMessage("密码"),
         "please_login": MessageLookupByLibrary.simpleMessage("请先登录"),
+        "project": MessageLookupByLibrary.simpleMessage("项目地址"),
         "rank": MessageLookupByLibrary.simpleMessage("排名"),
         "save": MessageLookupByLibrary.simpleMessage("保存"),
         "search_history": MessageLookupByLibrary.simpleMessage("搜索历史"),
@@ -45,6 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tab_me": MessageLookupByLibrary.simpleMessage("我的"),
         "tab_project": MessageLookupByLibrary.simpleMessage("项目"),
         "tips": MessageLookupByLibrary.simpleMessage("提示"),
+        "update_app": MessageLookupByLibrary.simpleMessage("立即更新"),
+        "update_app_fail_version":
+            MessageLookupByLibrary.simpleMessage("当前版本已经是最新版本"),
         "username": MessageLookupByLibrary.simpleMessage("用户名")
       };
 }

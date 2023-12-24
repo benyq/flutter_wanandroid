@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_wanandroid/net/api_response.dart';
 import 'package:flutter_wanandroid/net/model/category_model.dart';
 import 'package:flutter_wanandroid/net/model/collect_article_model.dart';
+import 'package:flutter_wanandroid/net/model/github_repository_release_model.dart';
 import 'package:flutter_wanandroid/net/model/hot_word_model.dart';
 import 'package:flutter_wanandroid/net/model/project_tree_model.dart';
 import 'package:flutter_wanandroid/net/page_model.dart';
@@ -58,5 +59,8 @@ abstract class WanAndroidService {
 
   @GET('tree/json')
   Future<ApiResponse<List<CategoryModel>>> categoryTree();
+
+  @GET('https://api.github.com/repos/benyq/flutter_wanandroid/releases')
+  Future<List<GithubRepositoryReleaseModel>> queryGithubRelease({@Query('per_page') int page = 1});
 
 }

@@ -289,6 +289,76 @@ class S {
       args: [],
     );
   }
+
+  /// `About`
+  String get about {
+    return Intl.message(
+      'About',
+      name: 'about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check Version`
+  String get check_version {
+    return Intl.message(
+      'Check Version',
+      name: 'check_version',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Project Website`
+  String get project {
+    return Intl.message(
+      'Project Website',
+      name: 'project',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check Loading...`
+  String get check_version_loading {
+    return Intl.message(
+      'Check Loading...',
+      name: 'check_version_loading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Close`
+  String get close {
+    return Intl.message(
+      'Close',
+      name: 'close',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update App`
+  String get update_app {
+    return Intl.message(
+      'Update App',
+      name: 'update_app',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The current version is already the latest version`
+  String get update_app_fail_version {
+    return Intl.message(
+      'The current version is already the latest version',
+      name: 'update_app_fail_version',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -8,6 +8,7 @@ import 'package:flutter_wanandroid/app_providers/theme_provider/themes_provider.
 import 'package:flutter_wanandroid/app_providers/user_provider/user_provider.dart';
 import 'package:flutter_wanandroid/generated/l10n.dart';
 import 'package:flutter_wanandroid/ui/login/login_page.dart';
+import 'package:flutter_wanandroid/ui/me/about/about_page.dart';
 import 'package:flutter_wanandroid/ui/me/collect/collect_page.dart';
 import 'package:flutter_wanandroid/ui/me/language/language_page.dart';
 import 'package:flutter_wanandroid/ui/me/language/provider/language_provider.dart';
@@ -93,7 +94,7 @@ class MePage extends ConsumerWidget {
             ),
             Container(
               margin: EdgeInsets.only(top: 15.h, left: 15.w, right: 15.w),
-              padding: EdgeInsets.all(15.w),
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
               width: double.infinity,
               alignment: Alignment.center,
               decoration: BoxDecoration(
@@ -111,7 +112,12 @@ class MePage extends ConsumerWidget {
                       content: languageState.language, onTap: () {
                     //页面跳转
                     navigateTo(context, const LanguagePage());
-                  })
+                  }),
+                  Divider(height: 1.h),
+                  _settingCell(Icons.info_rounded, S.of(context).about, onTap: () {
+                        //页面跳转
+                        navigateTo(context, const AboutPage());
+                      })
                 ],
               ),
             ),

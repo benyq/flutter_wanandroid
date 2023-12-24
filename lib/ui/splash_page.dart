@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_wanandroid/ui/main_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -21,9 +22,22 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).backgroundColor;
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: Center(child: const Text("SplashPage"),),
+      appBar: AppBar(
+        backgroundColor: color,
+        elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.dark,
+            statusBarColor: color),
+      ),
+      backgroundColor: color,
+      body: Center(child: Image.asset(
+        width: 150,
+        "assets/images/ic_logo.png",
+        fit: BoxFit.cover,
+        color: Colors.white,
+      ),),
     );
   }
 }
