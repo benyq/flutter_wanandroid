@@ -20,12 +20,12 @@ class Themes {
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.black),
         toolbarTextStyle: const TextStyle(color: Colors.black),
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
             systemNavigationBarColor: Colors.black,
             systemNavigationBarIconBrightness: Brightness.light,
             statusBarIconBrightness: Brightness.dark,
             statusBarBrightness: Brightness.light,
-            statusBarColor: lightColor),
+            statusBarColor: Colors.transparent),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: lightColor,
@@ -48,12 +48,12 @@ class Themes {
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white),
         toolbarTextStyle: const TextStyle(color: Colors.white),
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
             systemNavigationBarColor: Colors.black,
             systemNavigationBarIconBrightness: Brightness.light,
             statusBarIconBrightness: Brightness.light,
             statusBarBrightness: Brightness.dark,
-            statusBarColor: darkColor),
+            statusBarColor: Colors.transparent),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: darkColor,

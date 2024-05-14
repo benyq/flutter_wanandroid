@@ -23,7 +23,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.blue));
     _usernameController = TextEditingController();
     _pwdController = TextEditingController();
   }
